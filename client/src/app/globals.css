@@ -28,6 +28,7 @@ html, body, #root, .App {
   height: 100%;
   width: 100%;
   @apply text-sm;
-  @apply bg-gray-500;
+  @apply bg-white;
+  @apply dark:bg-gray-900;
   @apply text-gray-900;
 }

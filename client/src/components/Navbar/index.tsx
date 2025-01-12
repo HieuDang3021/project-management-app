@@ -29,13 +29,13 @@ const Navbar = () => {
         {/* Icon */}
         <div className='flex items-center '>
           <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))} 
-            className={`${isDarkMode ? 'dark:hover:bg-gray-700' : 'hover:bg-gray-100'} rounded p-2`}>
+            className={`${isDarkMode ? 'dark:hover:bg-gray-700' : 'hover:bg-gray-200'} rounded p-2 dark:active:bg-yellow-100 active:bg-blue-300`}>
               { isDarkMode ?
-                <Sun className='size-6 cursor-pointer dark:text-white'/>
-                : <Moon className='size-6 cursor-pointer dark:text-white'/>
+                <Sun className='size-6 cursor-pointer dark:text-white dark:active:text-yellow-500'/>
+                : <Moon className='size-6 cursor-pointer active:text-blue-600'/>
               }
             </button>
-          <Link href="/setting" className='h-min w-min rounded-full p-2 hover:bg-gray-200'>
+          <Link href="/setting" className='h-min w-min rounded-full p-2 hover:bg-gray-200 pointer-events-nsone'> {/* remove pointer-events-none when work*/}
             <Settings className='size-6 cursor-pointer dark:text-white'/>
           </Link>
           <div className='ml-2 mr-5 hidden min-h-[2em] w-[0.1rem] bg-gray-300 md:inline-block'/>

@@ -1,6 +1,6 @@
 'use client'
-import { Home, LockIcon, LucideIcon, X } from 'lucide-react';
-import React from 'react'
+import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from 'lucide-react';
+import React, { useState } from 'react'
 
 import Logo from '@/assets/icons/logo.svg'
 import { usePathname } from 'next/navigation';
@@ -9,8 +9,8 @@ import Link from 'next/link';
 import { setIsSideBarOpen } from '@/state';
 
 const Sidebar = () => {
-  // const [showProjects, setShowProjects] = useState(true);
-  // const [showPriority, setShowPriority] = useState(true);
+  const [showProjects, setShowProjects] = useState(true);
+  const [showPriority, setShowPriority] = useState(true);
 
   
   const dispatch = useAppDispatch();
@@ -48,7 +48,47 @@ const Sidebar = () => {
         {/* NAVBAR LINKS */}
         <nav className='z-10 w-full'>
           <SidebarLink href='/' icon={Home} lable='Home'/>
+          <SidebarLink href='/timeline' icon={Briefcase} lable='Timeline'/>
+          <SidebarLink href='/search' icon={Search} lable='Search'/>
+          <SidebarLink href='/settings' icon={Settings} lable='Settings'/>
+          <SidebarLink href='/users' icon={User} lable='User'/>
+          <SidebarLink href='/teams' icon={Users} lable='Team'/>
         </nav>
+
+        {/* PROJECTS LIST*/}
+        <button 
+          onClick={() => setShowProjects((prev) => !prev)} 
+          className='flex w-full items-center justify-between px-8 py-3 text-gray-800 dark:text-gray-100 border-t-[0.5px] border-gray-200 dark:border-gray-700'
+        >
+          <span className='text-xl'>Projects</span>
+          {showProjects ? 
+           <ChevronUp className='size-6'/> 
+           :
+           <ChevronDown className='size-6'/>
+          }
+        </button>
+
+        {/* PRIORITIES LIST*/}
+        <button 
+          onClick={() => setShowPriority((prev) => !prev)} 
+          className='flex w-full items-center justify-between px-8 py-3 text-gray-800 dark:text-gray-100 border-t-[0.5px] border-gray-200 dark:border-gray-900'
+        >
+          <span className='text-xl'>Priorities</span>
+          {showPriority ? 
+           <ChevronUp className='size-6'/> 
+           :
+           <ChevronDown className='size-6'/>
+          }
+        </button>
+        {showPriority &&
+          <>
+            <SidebarLink href='/priority/urgent' icon={AlertCircle} lable='Urgent'/>
+            <SidebarLink href='/priority/high' icon={ShieldAlert} lable='High'/>
+            <SidebarLink href='/priority/medium' icon={AlertTriangle} lable='Medium'/>
+            <SidebarLink href='/priority/low' icon={AlertOctagon} lable='Low'/>
+            <SidebarLink href='/priority/backlog' icon={Layers3} lable='Backlog'/>
+          </>
+        }
       </div>
     </div>
   )
@@ -58,27 +98,20 @@ interface SidebarLinkProps {
   href: string;
   icon: LucideIcon;
   lable: string;
-  // isOpen: boolean;
 };
 
 const SidebarLink = ({ 
   href, 
   icon: Icon, 
   lable, 
-  // isOpen
 }: SidebarLinkProps) => {
   const pathname = usePathname();
   const isActive = pathname === href || (pathname === '/' && href === '/dashboard');
-  // const screenWidth = window.innerWidth;
-
-  // const dispatch = useAppDispatch();
-  
-  // const isSideBarOpen = useAppSelector((state) => state.global.isSideBarOpen);
   
   return (
     <Link href={href} className='w-full'>
-      <div className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${isActive ? 'bg-gray-100 text-white dark:bg-gray-600' : ''}`}>
-        { isActive && <div className='absolute left-0 top-0 w-[5px] h-full bg-blue-200'/> }
+      <div className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${isActive ? 'bg-gray-100 text-white dark:bg-gray-800' : ''} justify-start px-8 py-3 text-gray-800 dark:text-gray-100`}>
+        { isActive && <div className='absolute left-0 top-0 w-[5px] h-full bg-blue-200 dark:bg-blue-800'/> }
         <Icon className='size-6 text-gray-800 dark:text-gray-100'/>
         <span className={`font-medium text-gray-800 dark:text-gray-100`}>{lable}</span>
       </div>
