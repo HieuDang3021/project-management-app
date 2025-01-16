@@ -13,8 +13,8 @@ const Navbar = () => {
   return (
     <div className='flex items-center justify-between bg-white px-4 py-3 dark:bg-black'> 
         {/* menu button */}
-        <div className='flex items-center gap-8'>
-          { !isSideBarOpen && 
+        <div className='flex items-center gap-6'>
+          { (!isSideBarOpen || window.matchMedia('(max-width: 640px)').matches) &&
             <button onClick={() => dispatch(setIsSideBarOpen(!isSideBarOpen))}>
               <Menu className='size-8 cursor-pointer dark:text-white'/>
             </button>
