@@ -36,6 +36,9 @@ async function main() {
 
   await deleteAllData(orderedFileNames);
 
+  console.log('\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+  console.log("Seeding data...\n");
+
   for (const fileName of orderedFileNames) {
     const filePath = path.join(dataDirectory, fileName);
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
@@ -44,30 +47,47 @@ async function main() {
 
 
     try {
-      console.log('resetting sequence for', modelName);
+      console.log('Resetting sequence for', modelName);
       // Dynamically fetch sequence name
       const tableName = `"${modelName.charAt(0).toUpperCase()}${modelName.slice(1)}"`; // Assuming the table name matches the model name in lowercase
-      const result = await prisma.$queryRawUnsafe<{ sequence_name: string }[]>(`
+      const result1 = await prisma.$queryRawUnsafe<{ sequence_name: string }[]>(`
         SELECT pg_get_serial_sequence('${tableName}', 'id') AS sequence_name;
       `);
 
       // Check if the result has a valid sequence name
-      const sequenceName = result?.[0]?.sequence_name;
+      const sequenceName = result1?.[0]?.sequence_name;
       if (sequenceName) {
         await prisma.$executeRawUnsafe(`
           ALTER SEQUENCE ${sequenceName} RESTART WITH 1;
         `);
-        console.log(`Sequence for ${sequenceName} reset to 1.`);
+        console.log(`->Sequence for ${sequenceName} reset to 1.`);
       } else {
-        console.warn(`No sequence found for table ${tableName}.`);
+        console.warn(`->No sequence found for table ${tableName}.`);
       }
 
       for (const data of jsonData) {
         await model.create({ data });
       }
       console.log(`Seeded ${modelName} with data from ${fileName}`);
+
+      console.log('Setting sequence to the current id for', modelName);
+      // Dynamically fetch sequence name
+      const result2 = await prisma.$queryRawUnsafe<{ setval: string }[]>(`
+        SELECT setval(pg_get_serial_sequence('${tableName}', 'id'), coalesce(max(id)+1, 1), false) FROM ${tableName};
+      `);
+
+      // Check if the result has a valid sequence name
+      const sequenceName2 = result2?.[0]?.setval;
+      if (sequenceName2) {
+        console.log(`->Sequence for ${tableName} set to the current id of ${sequenceName2}.`);
+      } else {
+        console.warn(`->No sequence found for table ${tableName}.`);
+      }
+
+      console.log('\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+
     } catch (error) {
-      console.error(`Error seeding data for ${modelName}:`, error, '\n~~~~~~~~~~~~~~~');
+      console.error(`Error seeding data for ${modelName}:`, error, '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
     }
   }
 }
