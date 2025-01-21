@@ -66,11 +66,11 @@ model ProjectTeam {
 model Task {
   id             Int       @id @default(autoincrement())
   title          String
-  description    String?
-  status         String?
-  priority       String?
+  description    String?   @default("No description")
+  status         String?   @default("To Do")
+  priority       String?   @default("Low")
   tags           String?
-  startDate      DateTime?
+  startDate      DateTime? @default(now())
   dueDate        DateTime?
   authorUserId   Int
   assignedUserId Int?
