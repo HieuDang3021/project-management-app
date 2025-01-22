@@ -3,7 +3,7 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getTasks = async (req: Request, res: Response): Promise<void> => {
+exports.getTasks = async (req: Request, res: Response): Promise<void> => {
   const { project_id } = req.params;
   try {
     const tasks = await prisma.task.findMany({
@@ -28,7 +28,7 @@ export const getTasks = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const createTask = async (req: Request, res: Response): Promise<void> => {
+exports.createTask = async (req: Request, res: Response): Promise<void> => {
   const { 
     title, 
     projectId, 
@@ -81,7 +81,7 @@ export const createTask = async (req: Request, res: Response): Promise<void> => 
   }
 };
 
-export const updateTaskStatus = async (
+exports.updateTaskStatus = async (
   req: Request,
   res: Response
 ): Promise<void> => {

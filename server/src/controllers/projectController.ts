@@ -3,7 +3,7 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getProjects = async (req: Request, res: Response): Promise<void> => {
+exports.getProjects = async (req: Request, res: Response): Promise<void> => {
   try {
     const projects = await prisma.project.findMany();
     res.status(200).json(projects);
@@ -16,7 +16,7 @@ export const getProjects = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-export const createProject = async (req: Request, res: Response): Promise<void> => {
+exports.createProject = async (req: Request, res: Response): Promise<void> => {
   const { name, description, startDate, endDate } = req.body;
 
   // Validate all required fields

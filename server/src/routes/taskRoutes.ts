@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { getTasks, createTask, updateTaskStatus } from "../controllers/taskController";
+const controller = require("../controllers/taskController");
 
 const router = Router();
 
 // GET /tasks/:project_id
-router.get("/:project_id", getTasks);
+router.get("/:project_id", controller.getTasks);
 
 // POST /tasks/new
-router.post("/new", createTask);
+router.post("/new", controller.createTask);
 
 //PATCH /tasks/:task_id/status
-router.patch("/:id/status", updateTaskStatus);
+router.patch("/:id/status", controller.updateTaskStatus);
 
 export default router;
