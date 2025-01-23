@@ -70,6 +70,7 @@ model Task {
   status         String?   @default("To Do")
   priority       String?   @default("Low")
   tags           String?
+  points         Int?      @default(2)
   startDate      DateTime? @default(now())
   dueDate        DateTime?
   authorUserId   Int

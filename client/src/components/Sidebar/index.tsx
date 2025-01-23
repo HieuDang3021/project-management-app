@@ -38,7 +38,7 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarClassNames}>
-      <div className="flex h-[100%] w-full flex-col justify-start">
+      <div className="scrollbar-hidden flex h-[100%] w-full flex-col justify-start overflow-x-hidden">
         {/* TOP TITLE */}
         <div className="z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
           <div className="text-xl font-bold text-gray-800 dark:text-white">

@@ -32,3 +32,11 @@ html, body, #root, .App {
   @apply dark:bg-gray-900;
   @apply text-gray-900;
 }
+
+@layer components {
+  .scrollbar-hidden {
+    overflow-y: auto;
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none; /* For Firefox */
+  }
+}

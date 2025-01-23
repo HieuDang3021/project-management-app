@@ -8,7 +8,7 @@ type Props = {
 };
 
 const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
-  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = React.useState(false);
+  // const [isModalNewTaskOpen, setIsModalNewTaskOpen] = React.useState(false);
 
   return (
     <div className="px-4 xl:px-6">
