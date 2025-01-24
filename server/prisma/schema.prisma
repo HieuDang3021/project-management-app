@@ -77,12 +77,12 @@ model Task {
   assignedUserId Int?
   projectId      Int
 
-  project    Project          @relation(fields: [projectId], references: [id])
-  author     User             @relation("TaskAuthor", fields: [authorUserId], references: [id])
-  assignee   User?            @relation("TaskAssignee", fields: [assignedUserId], references: [id])
-  taskAssign TaskAssignment[]
-  attachment Attachment[]
-  comment    Comment[]
+  project         Project          @relation(fields: [projectId], references: [id])
+  author          User             @relation("TaskAuthor", fields: [authorUserId], references: [id])
+  assignee        User?            @relation("TaskAssignee", fields: [assignedUserId], references: [id])
+  taskAssignments TaskAssignment[]
+  attachments     Attachment[]
+  comments        Comment[]
 }
 
 model TaskAssignment {

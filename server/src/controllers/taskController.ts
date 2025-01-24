@@ -11,10 +11,10 @@ exports.getTasks = async (req: Request, res: Response): Promise<void> => {
         projectId: Number(project_id)
       },
       include: {
-        author: { select: { id: true, username: true } },
-        assignee: { select: { id: true, username: true } },
-        attachment: true,
-        comment: true
+        author: { select: { id: true, username: true, profilePictureUrl: true } },
+        assignee: { select: { id: true, username: true, profilePictureUrl: true } },
+        attachments: true,
+        comments: true
       }
     });
     res.status(200).json(tasks);
