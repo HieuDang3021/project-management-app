@@ -29,7 +29,7 @@ const DashBoardLayout = ({ children }: { children?: React.ReactNode }) => {
     <div className="flex min-h-full w-full bg-gray-50 text-gray-900">
       <Sidebar />
       <main
-        className={`after:contents-[""] relative flex w-full flex-col bg-gray-50 after:absolute after:inset-0 after:z-10 after:bg-gray-900 after:transition-opacity after:duration-[0.7s] dark:bg-dark-bg md:after:content-none ${isSideBarOpen ? "after:opacity-50 md:pl-64" : "after:pointer-events-none after:opacity-0"}`}
+        className={`after:contents-[""] flex w-full flex-col bg-gray-50 after:absolute after:inset-0 after:z-10 after:bg-gray-900 after:transition-opacity after:duration-[0.7s] dark:bg-dark-bg md:after:content-none ${isSideBarOpen ? "after:opacity-50 md:pl-64" : "after:pointer-events-none after:opacity-0"}`}
         onClick={() => handleClickOutside()}
       >
         <Navbar />

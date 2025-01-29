@@ -20,7 +20,7 @@ export interface Project {
   name: string;
   description?: string;
   startDate?: string;
-  DueDate?: string;
+  endDate?: string;
 }
 
 export interface User {
