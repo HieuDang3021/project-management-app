@@ -46,8 +46,8 @@ exports.createTask = async (req: Request, res: Response): Promise<void> => {
   if (
     !projectId || !title || !authorUserId ||
     title.trim() === '' || 
-    authorUserId.trim() === '' ||
-    projectId.trim() === ''
+    authorUserId.toString().trim() === '' ||
+    projectId.toString().trim() === ''
   ) {
     res.status(400).json({ message: "Please provide all required fields: projectId, title, authorUserId!" });
     return;

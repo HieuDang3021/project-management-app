@@ -52,8 +52,8 @@ export interface Comment {
 export interface Task {
   id: number;
   title: string;
-  projectId: string;
-  authorUserId: string;
+  projectId: number;
+  authorUserId: number;
   status?: Status;
   priority?: Priority;
   tags?: string;

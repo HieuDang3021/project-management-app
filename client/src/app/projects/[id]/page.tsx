@@ -7,6 +7,8 @@ import BoardView from "../BoardView";
 import ListView from "../ListView";
 import TimelineView from "../TimelineView";
 import TableView from "../TableView";
+import ModalNewTask from "@/components/ModalNewTask";
+import { Status } from "@/state/api";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -16,6 +18,7 @@ const Project = ({ params }: Props) => {
   const [id, setId] = React.useState<string | null>(null);
   const [activeTab, setActiveTab] = React.useState("Board");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = React.useState(false);
+  const [currentStatus, setCurrentStatus] = React.useState<Status>(Status.ToDo);
 
   React.useEffect(() => {
     // Unwrap the `params` Promise
@@ -31,9 +34,21 @@ const Project = ({ params }: Props) => {
   return (
     <div>
       {/* MODAL NEW TASKS */}
+      {isModalNewTaskOpen && (
+        <ModalNewTask
+          isOpen={isModalNewTaskOpen}
+          onClose={() => setIsModalNewTaskOpen(false)}
+          id={id}
+          currentStatus={currentStatus}
+        />
+      )}
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "Board" && (
-        <BoardView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+        <BoardView
+          id={id}
+          setIsModalNewTaskOpen={setIsModalNewTaskOpen}
+          setCurrentStatus={setCurrentStatus}
+        />
       )}
       {activeTab === "List" && (
         <ListView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />

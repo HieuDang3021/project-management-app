@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 
 type Props = {
   children: React.ReactNode;
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose: () => void;
   name: string;
 };

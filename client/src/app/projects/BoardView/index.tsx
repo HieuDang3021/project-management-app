@@ -15,9 +15,10 @@ import Image from "next/image";
 type Props = {
   id: string;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
+  setCurrentStatus: (status: Status) => void;
 };
 
-const BoardView = ({ id, setIsModalNewTaskOpen }: Props) => {
+const BoardView = ({ id, setIsModalNewTaskOpen, setCurrentStatus }: Props) => {
   const { data: tasks, isLoading, error } = useGetTasksQuery(id);
   const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
@@ -42,6 +43,7 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: Props) => {
             tasks={tasks?.filter((task) => task.status === status) || []}
             moveTask={moveTask}
             setIsModalNewTaskOpen={setIsModalNewTaskOpen}
+            setCurrentStatus={setCurrentStatus}
           />
         ))}
       </div>
@@ -56,6 +58,7 @@ type TaskColumnProps = {
   tasks: TaskType[];
   moveTask: (taskId: number, status: Status) => void;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
+  setCurrentStatus: (status: Status) => void;
 };
 
 const TaskColumn = ({
@@ -63,6 +66,7 @@ const TaskColumn = ({
   tasks,
   moveTask,
   setIsModalNewTaskOpen,
+  setCurrentStatus,
 }: TaskColumnProps) => {
   const [{ isOver }, drop] = useDrop({
     accept: "task",
@@ -109,7 +113,10 @@ const TaskColumn = ({
             </button>
             <button
               className="flex size-6 items-center justify-center rounded bg-gray-200 dark:bg-gray-600 dark:text-white"
-              onClick={() => setIsModalNewTaskOpen(true)}
+              onClick={() => {
+                setCurrentStatus(status as Status);
+                setIsModalNewTaskOpen(true);
+              }}
             >
               <Plus size={16} />
             </button>
