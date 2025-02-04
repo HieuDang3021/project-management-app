@@ -19,7 +19,7 @@ type Props = {
 };
 
 const BoardView = ({ id, setIsModalNewTaskOpen, setCurrentStatus }: Props) => {
-  const { data: tasks, isLoading, error } = useGetTasksQuery(id);
+  const { data: tasks, isLoading, error } = useGetTasksQuery(Number(id));
   const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
   const moveTask = (taskId: number, status: Status) => {

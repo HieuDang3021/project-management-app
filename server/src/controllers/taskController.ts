@@ -28,6 +28,32 @@ exports.getTasks = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+exports.getUserTasks = async (req: Request, res: Response): Promise<void> => {
+  const { userId } = req.params;
+  try {
+    const tasks = await prisma.task.findMany({
+      where: {
+        OR: [
+          { authorUserId: Number(userId) },
+          { assignedUserId: Number(userId) },
+        ]
+      },
+      include: {
+        author: { select: { id: true, username: true, profilePictureUrl: true } },
+        assignee: { select: { id: true, username: true, profilePictureUrl: true } },
+      }
+    });
+    res.status(200).json(tasks);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: "Error retrieving user's tasks", error: error.message });
+    } else {
+      res.status(500).json({ message: "Error retrieving user's tasks", error: String(error) });
+    }
+    console.error(error);
+  }
+};
+
 exports.createTask = async (req: Request, res: Response): Promise<void> => {
   const { 
     title, 

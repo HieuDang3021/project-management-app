@@ -6,6 +6,9 @@ const router = Router();
 // GET /tasks/:project_id
 router.get("/:project_id", controller.getTasks);
 
+//GET /tasks/user/:user_id
+router.get("/user/:user_id", controller.getUserTasks);
+
 // POST /tasks/new
 router.post("/new", controller.createTask);
 

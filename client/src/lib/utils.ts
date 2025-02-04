@@ -6,17 +6,20 @@ export const dataGridClassName =
       "& .MuiDataGrid-columnHeaders": {
         color: `${isDarkMode ? "#e5e7eb" : ""}`,
         '& [role="row"] > *': {
-          backgroundColor: `${isDarkMode ? "#1d1f21" : "white"}`,
+          backgroundColor: `${isDarkMode ? "#1f2937" : "white"}`,
           borderColor: `${isDarkMode ? "#2d3135" : ""}`
         },
       },
-      "& .MuiIconbutton-root": {
+      "& .MuiIconButton-root": {
         color: `${isDarkMode ? "#a3a3a3" : ""}`
       },
       "& .MuiTablePagination-root": {
         color: `${isDarkMode ? "#a3a3a3" : ""}`
       },
       "& .MuiTablePagination-selectIcon": {
+        color: `${isDarkMode ? "#a3a3a3" : ""}`
+      },
+      "& .MuiDataGrid-menuIcon": {
         color: `${isDarkMode ? "#a3a3a3" : ""}`
       },
       "& .MuiDataGrid-cell": {
