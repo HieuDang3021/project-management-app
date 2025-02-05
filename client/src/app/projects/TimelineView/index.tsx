@@ -14,7 +14,7 @@ type TaskTypeItems = "task" | "milestone" | "project";
 const TimelineView = ({ id, setIsModalNewTaskOpen }: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  const { data: tasks, error, isLoading } = useGetTasksQuery(id);
+  const { data: tasks, error, isLoading } = useGetTasksQuery(Number(id));
 
   const [displayOptions, setDisplayOptions] = React.useState<DisplayOption>({
     viewMode: ViewMode.Month,

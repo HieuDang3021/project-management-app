@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ListView = ({ id, setIsModalNewTaskOpen }: Props) => {
-  const { data: tasks, error, isLoading } = useGetTasksQuery(id);
+  const { data: tasks, error, isLoading } = useGetTasksQuery(Number(id));
 
   if (isLoading) {
     return <div>Loading...</div>;

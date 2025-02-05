@@ -7,7 +7,7 @@ const router = Router();
 router.get("/:project_id", controller.getTasks);
 
 //GET /tasks/user/:user_id
-router.get("/user/:user_id", controller.getUserTasks);
+router.get("/user/:userId", controller.getUserTasks);
 
 // POST /tasks/new
 router.post("/new", controller.createTask);
