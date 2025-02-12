@@ -9,6 +9,7 @@ type Props = {
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ListView = ({ id, setIsModalNewTaskOpen }: Props) => {
   const { data: tasks, error, isLoading } = useGetTasksQuery(Number(id));
 
